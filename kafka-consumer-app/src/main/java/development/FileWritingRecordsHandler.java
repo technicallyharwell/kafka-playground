@@ -19,8 +19,10 @@ public class FileWritingRecordsHandler implements ConsumerRecordsHandler<String,
     @Override
     public void process(final ConsumerRecords<String, String> consumerRecords) {
         final List<String> valueList = new ArrayList<>();
+        /*In a real world application, this is where the meaty business logic for
+        * processing individual records from Kafka would go*/
         consumerRecords.forEach(record -> valueList.add(record.value()));
-        if (!valueList.isEmpty()) {
+        if (!valueList.isEmpty()) { // consumer has
             try {
                 Files.write(path, valueList, StandardOpenOption.CREATE, StandardOpenOption.WRITE, StandardOpenOption.APPEND);
             } catch (IOException e) {
